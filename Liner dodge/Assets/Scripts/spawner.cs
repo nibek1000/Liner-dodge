@@ -7,7 +7,7 @@ public class spawner : MonoBehaviour
 {
     public GameObject[] przeszkody;
     public GameObject placeToSpawn;
-
+    public GameObject CameraM;
     public Text Score;
     public Text ScoreOnScreen;
     public Text BestScore;
@@ -21,7 +21,7 @@ public class spawner : MonoBehaviour
     {
         if(PlayGame == true)
         {
-        Instantiate(przeszkody[Random.Range(0, 7)], placeToSpawn.transform);
+        Instantiate(przeszkody[Random.Range(0, 12)], placeToSpawn.transform);
         }
 
 
@@ -61,6 +61,7 @@ public class spawner : MonoBehaviour
 
     public void PlayAgain()
     {
+        PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + ScoreInt);
         Application.LoadLevel(0);
     }
 
@@ -68,6 +69,7 @@ public class spawner : MonoBehaviour
     {
         Menu.SetActive(false);
         PlayGame = true;
+        CameraM.GetComponent<Animator>().SetBool("bool", true);
         StartCoroutine(ScoreGaining());
     }
 
