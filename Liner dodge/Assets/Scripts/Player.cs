@@ -41,13 +41,13 @@ public class Player : MonoBehaviour
             {
                 whereIs = 1;
                 Effects.clip = A;
-                Effects.Play();
+                //Effects.Play();
             }
             if (transform.position == targetB.transform.position)
             {
                 whereIs = 2;
                 Effects.clip = B;
-                Effects.Play();
+                //Effects.Play();
             }
         }
 

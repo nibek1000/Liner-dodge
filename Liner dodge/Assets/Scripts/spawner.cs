@@ -21,7 +21,7 @@ public class spawner : MonoBehaviour
     {
         if(PlayGame == true)
         {
-        Instantiate(przeszkody[Random.Range(0, 12)], placeToSpawn.transform);
+        Instantiate(przeszkody[Random.Range(0, 10)], placeToSpawn.transform);
         }
 
 
@@ -62,6 +62,7 @@ public class spawner : MonoBehaviour
     public void PlayAgain()
     {
         PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + ScoreInt);
+        Time.timeScale = 1.0f;
         Application.LoadLevel(0);
     }
 
@@ -71,6 +72,7 @@ public class spawner : MonoBehaviour
         PlayGame = true;
         CameraM.GetComponent<Animator>().SetBool("bool", true);
         StartCoroutine(ScoreGaining());
+        StartCoroutine(MakeHarder());
     }
 
     public void Exit()
@@ -86,5 +88,12 @@ public class spawner : MonoBehaviour
             ScoreInt ++;
         }
         StartCoroutine(ScoreGaining());
+    }
+
+    IEnumerator MakeHarder()
+    {
+        yield return new WaitForSeconds(6);
+        Time.timeScale = Time.timeScale + 0.02f;
+        StartCoroutine(MakeHarder());
     }
 }

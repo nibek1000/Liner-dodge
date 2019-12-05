@@ -14,12 +14,17 @@ public class Store : MonoBehaviour
     public GameObject StartGameButton;
     public Text PriceText;
     public Text TotalCoins;
+    public InputField SecretCode;
     // Start is called before the first frame update
     void Start()
     {
         coins = PlayerPrefs.GetInt("coins");
         PlayerPrefs.SetInt("i0", 1);
         BoughtChecker();
+        if(PlayerPrefs.GetInt("SC") == 1)
+        {
+            SecretCode.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -38,6 +43,14 @@ public class Store : MonoBehaviour
         }
         PriceText.text = "Price: " + prices[current];
         TotalCoins.text = "" + PlayerPrefs.GetInt("coins");
+
+        if(SecretCode.text == "EndOfTheRainbow")
+        {
+            SecretCode.gameObject.SetActive(false);
+            PlayerPrefs.SetInt("coins", 999999999);
+            PlayerPrefs.SetInt("SC", 1);
+            Application.LoadLevel(0);
+        }
     }
 
     public void Next()
